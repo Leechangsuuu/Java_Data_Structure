@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;Chap4.objectStack&apos; to &apos;실습4_2_1객체스택&apos;&#x0D;&#x0A;- Original project: &apos;edu&apos;&#x0D;&#x0A;- Original element: &apos;Chap4.objectStack&apos;&#x0D;&#x0A;- Renamed element: &apos;Chap4.실습4_2_1객체스택&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;objectStack&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;Chap4{objectStack.java[objectStack" matchStrategy="1" name="실습4_2_1객체스택" qualified="false" references="true" similarDeclarations="false" stamp="1717393671952" textual="false" version="1.0"/>
+</session>
