@@ -23,44 +23,71 @@ class IntQueue3 {
 
 //--- 실행시 예외: 큐가 비어있음 ---//
 	public class EmptyIntQueue3Exception extends RuntimeException {
-		public EmptyIntQueue3Exception() {
+		public EmptyIntQueue3Exception(String message) {
+			super(message);
 		}
 	}
 
 //--- 실행시 예외: 큐가 가득 찼음 ---//
 	public class OverflowIntQueue3Exception extends RuntimeException {
-		public OverflowIntQueue3Exception() {
+		public OverflowIntQueue3Exception(String message) {
+			super(message);
 		}
 	}
 
 //--- 생성자(constructor) ---//
 	public IntQueue3(int maxlen) {
-
-	}
+		num = rear = front = 0;
+		capacity = maxlen;
+		try {
+			que = new int[capacity];//큐본체 생성
+		}catch(OutOfMemoryError e) {
+			capacity = 0; //생성할수 없음
+		}
+	}		
 
 //--- 큐에 데이터를 인큐 ---//
 	public int enque(int x) throws OverflowIntQueue3Exception {
-
-	}
+		if(num>=capacity) 
+			throw new OverflowIntQueue3Exception("Full");
+		que[rear++] = x;//데이터를 인큐하고 rear과 num을 1증가
+		num++;
+		if(rear == capacity)
+			rear = 0;//rear 값이 capacity 와 같아지는걸 방지
+		return x;
+	}	
 
 //--- 큐에서 데이터를 디큐 ---//
 	public int deque() throws EmptyIntQueue3Exception {
-
+		if(num <= 0)
+			throw new EmptyIntQueue3Exception("Empty");
+		int x = que[front++];
+		num--;
+		if(front == capacity)
+			front = 0;
+		return x;
 	}
 
 //--- 큐에서 데이터를 피크(프런트 데이터를 들여다봄) ---//
 	public int peek() throws EmptyIntQueue3Exception {
-
+		if(num <= 0)
+			throw new EmptyIntQueue3Exception("Empty");
+		return que[front];
 	}
 
 //--- 큐를 비움 ---//
 	public void clear() {
-
+		num = rear = front = 0;
 	}
 
 //--- 큐에서 x를 검색하여 인덱스(찾지 못하면 –1)를 반환 ---//
 	public int indexOf(int x) {
-
+		for(int i = 0; i<num;i++) {
+			int idx = (i+front)%capacity;
+			if(que[idx] == x)
+				return idx;
+		}
+		return -1;
 	}
 
 //--- 큐의 크기를 반환 ---//
@@ -85,7 +112,9 @@ class IntQueue3 {
 
 //--- 큐 안의 모든 데이터를 프런트 → 리어 순으로 출력 ---//
 	public void dump() {
-
+		for(int i = 0; i<num; i++) {
+			System.out.println(que[(i+front)%capacity]+" ");
+		System.out.println();
 	}
 }
 	public static void main(String[] args) {
