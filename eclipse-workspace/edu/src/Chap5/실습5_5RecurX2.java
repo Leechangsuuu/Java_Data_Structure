@@ -1,6 +1,6 @@
 package Chap5;
 
-package Chap5_Recursive;
+
 /*
  * 실습 5-7: stack을 이용한 non-recursive 코드로 구현
  * 정수 스택을 사용한 non-recursive 코드 구현
@@ -16,13 +16,15 @@ class IntStack {
 
 	// --- 실행시 예외 : 스택이 비어있음 ---//
 	public class EmptyIntStackException extends RuntimeException {
-		public EmptyIntStackException() {
+		public EmptyIntStackException(String message) {
+			super(message);
 		}
 	}
 
 	// --- 실행시 예외 : 스택이 가득 참 ---//
 	public class OverflowIntStackException extends RuntimeException {
-		public OverflowIntStackException() {
+		public OverflowIntStackException(String message) {
+			super(message);
 		}
 	}
 
@@ -40,7 +42,7 @@ class IntStack {
 	// --- 스택에 x를 푸시 ---//
 	public void push(int p) throws OverflowIntStackException {
 		if (top >= capacity) // 스택이 가득 참
-			throw new OverflowIntStackException();
+			throw new OverflowIntStackException("full");
 		data[top++] = p;
 		return;
 	}
@@ -49,7 +51,7 @@ class IntStack {
 	public int pop() throws EmptyIntStackException {
 		System.out.println("pop():: top = " + top);
 		if (top <= 0) // 스택이 빔
-			throw new EmptyIntStackException();
+			throw new EmptyIntStackException("Empty");
 //		Point ip = data[--top];
 //		System.out.println("pop::"+ip.toString());
 		return data[--top];
@@ -58,7 +60,7 @@ class IntStack {
 	// --- 스택에서 데이터를 피크(peek, 정상에 있는 데이터를 들여다봄) ---//
 	public int peek() throws EmptyIntStackException {
 		if (top <= 0) // 스택이 빔
-			throw new EmptyIntStackException();
+			throw new EmptyIntStackException("Empty");
 		return data[top - 1];
 	}
 
