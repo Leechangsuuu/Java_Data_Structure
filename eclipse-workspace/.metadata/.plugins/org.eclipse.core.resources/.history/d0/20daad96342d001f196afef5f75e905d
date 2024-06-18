@@ -53,9 +53,9 @@ public class Test_객체merge정렬 {
 		while(j <= rightb) {
 			temp[k++] = a[j++];
 		}
-		for(k = 0; k < n; k++) {
-			a[k+lefta] = temp[k];
-			System.out.println(" " + a[lefta+k]);
+		for(int t = 0; t < temp.length; t++) {
+			a[t+lefta] = temp[t];
+			System.out.println(" " + a[lefta+j]);
 		}
 		System.out.println();
 	}

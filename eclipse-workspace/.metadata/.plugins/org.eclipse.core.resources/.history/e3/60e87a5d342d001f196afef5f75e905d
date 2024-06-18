@@ -24,9 +24,8 @@ class PhyscData4 implements Comparable<PhyscData4>{
     	}
     	return result;
     }
-    public String toString() {
-    	return name + "(키:" + height + ", 시력:" + vision;
-    }
+    
+    
 }
 
 public class Test_객체merge정렬 {
@@ -48,14 +47,14 @@ public class Test_객체merge정렬 {
 			}
 		}
 		while (i <= righta) {
-			temp[k++] = a[i++];
-		}
-		while(j <= rightb) {
 			temp[k++] = a[j++];
 		}
-		for(k = 0; k < n; k++) {
-			a[k+lefta] = temp[k];
-			System.out.println(" " + a[lefta+k]);
+		while(j <= rightb) {
+			temp[k++] = a[i++];
+		}
+		for(int t = 0; t < temp.length; t++) {
+			a[t+lefta] = temp[t];
+			System.out.println(" " + a[lefta+j]);
 		}
 		System.out.println();
 	}

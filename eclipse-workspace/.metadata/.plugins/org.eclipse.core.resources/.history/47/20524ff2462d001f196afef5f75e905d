@@ -57,34 +57,7 @@ public class Test_다항식merge연산 {
 		merge(a, left, mid, mid+1, right);
 		return;
 	}
-	static void ShowPolynomial(Term[] p) {
-		
-		
-	}
-	static void AddPolynomial(Term[] PolynomialX,Term[]PolynomialY,Term[]PolynomialZ){
-		int i = 0, j = 0, k = 0;
-		while (i < PolynomialX.length &&  j < PolynomialY.length) {
-			if(PolynomialX[i].exp == PolynomialY[j].exp) { //지수같을때
-				PolynomialZ[k++] = new Term(PolynomialX[i].coef + PolynomialY[j].coef , PolynomialX[i].exp);
-				i++;//다음 항으로
-				j++;
-			}
-			else if(PolynomialX[i].exp > PolynomialY[j].exp) {//첫번쨰 다항식의 지수가 더 클떄 z에 두번쨰 다항식 추가하고 두번쨰 다항식의 다음 항으로 이동
-				PolynomialZ[k++] = PolynomialY[j++];
-			}
-			else {//두번쨰 다항식의 지수가 더 클떄 z에 첫번쨰 다항식 추가하고 척번쨰 다항식의 다음 항으로 이동
-				PolynomialZ[k++] = PolynomialY[j++];
-				PolynomialZ[k++] = PolynomialX[i++];
-			}
-		}
-		while(i < PolynomialX.length) {// 첫번쨰 다항식에 남아있는 항이 있으면 남아있는항을 모두 결과 다항식에 추가
-			PolynomialZ[k++] = PolynomialX[i++];
-		}
-		while(j < PolynomialY.length) {// 두번쨰 다항식에 남아있는 항이 있으면 남아있는항을 모두 결과 다항식에 추가
-			PolynomialZ[k++] = PolynomialY[j++];
-		}
-		
-	}
+
 	public static void main(String[] args) {
 		Term[] PolynomialX = {
 		         new Term(1.5, 3),
@@ -113,13 +86,13 @@ public class Test_다항식merge연산 {
 		MergeSort(PolynomialY, 0, PolynomialY.length - 1); // 배열 x를 퀵정렬
 		ShowPolynomial(PolynomialX);
 		ShowPolynomial(PolynomialY);
-		Term[] PolynomialZ = new Term[20];
-		AddPolynomial(PolynomialX,PolynomialY,PolynomialZ );//다항식 덧셈 z = x + y
+		Term[] z = new Term[20];
+		AddPolynomial(PolynomialX,PolynomialY,z);//다항식 덧셈 z = x + y
 		ShowPolynomial(z);
 		ShowPolynomial(PolynomialY);
-		MultiplyPolynomial(PolynomialX,PolynomialY,PolynomialZ );//다항식 곱셈 z = x * y
+		MultiplyPolynomial(PolynomialX,PolynomialY,z);//다항식 곱셈 z = x * y
 		ShowPolynomial(PolynomialY);
-		int result = EvaluatePolynomial(PolynomialZ , 10);//다항식 값 계산 함수 z(10) 값 계산한다 
+		int result = EvaluatePolynomial(z, 10);//다항식 값 계산 함수 z(10) 값 계산한다 
 		System.out.println(" result = " + result );
 	}
 }

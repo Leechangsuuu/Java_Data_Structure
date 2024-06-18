@@ -4,36 +4,23 @@ package Chap6;
  * 6장 구현 실습과제1 
  */
 
-class PhyscData4 implements Comparable<PhyscData4>{
+class PhyscData implements Comparable<PhyscData>{
     String name;              // 이름
     int height;            // 키
     double vision;            // 시력
     
-    public PhyscData4(String name ,int height,double vision){
+    public PhyscData(String name ,int height,double vision){
     	this.name = name;
     	this.height = height;
     	this.vision = vision;
-    }
-    public int compareTo(PhyscData4 p) {
-    	int result = this.name.compareTo(p.name);
-    	if(result == 0) {
-    		result = Integer.compare(this.height, p.height);
-    		if(result == 0) {
-    			result = Double.compare(this.vision, p.vision);
-    		}
-    	}
-    	return result;
-    }
-    public String toString() {
-    	return name + "(키:" + height + ", 시력:" + vision;
     }
 }
 
 public class Test_객체merge정렬 {
 	// --- 배열 요소 a[idx1]와 a[idx2]의 값을 교환 ---//
-	static void merge(PhyscData4[] a, int lefta, int righta, int leftb, int rightb ) {
+	static void merge(PhyscData[] a, int lefta, int righta, int leftb, int rightb ) {
 		int n = rightb - lefta + 1;
-		PhyscData4 [] temp = new PhyscData4[n];
+		PhyscData [] temp = new PhyscData[n];
 		int i = lefta;
 		int j = leftb;
 		int k = 0;
@@ -47,21 +34,21 @@ public class Test_객체merge정렬 {
 				temp[k++] = a[j++];
 			}
 		}
-		while (i <= righta) {
-			temp[k++] = a[i++];
-		}
-		while(j <= rightb) {
+		while (i > righta && j <=rightb) {
 			temp[k++] = a[j++];
 		}
-		for(k = 0; k < n; k++) {
-			a[k+lefta] = temp[k];
-			System.out.println(" " + a[lefta+k]);
+		while(j>rightb && i<= righta) {
+			temp[k++] = a[i++];
+		}
+		for(int t = 0; t < temp.length; t++) {
+			a[t+lefta] = temp[t];
+			System.out.println(" " + a[lefta+j]);
 		}
 		System.out.println();
 	}
 
 	// --- 퀵 정렬(비재귀 버전)---//
-	static void MergeSort(PhyscData4[] a, int left, int right) {
+	static void MergeSort(PhyscData[] a, int left, int right) {
 		int mid = (left+right)/2;
 		if (left == right) return;
 		MergeSort(a, left, mid);
@@ -71,14 +58,14 @@ public class Test_객체merge정렬 {
 	}
 
 	public static void main(String[] args) {
-		PhyscData4[] x = {
-		         new PhyscData4("강민하", 162, 0.3),
-		         new PhyscData4("김찬우", 173, 0.7),
-		         new PhyscData4("박준서", 171, 2.0),
-		         new PhyscData4("유서범", 171, 1.5),
-		         new PhyscData4("이수연", 168, 0.4),
-		         new PhyscData4("장경오", 171, 1.2),
-		         new PhyscData4("황지안", 169, 0.8),
+		PhyscData[] x = {
+		         new PhyscData("강민하", 162, 0.3),
+		         new PhyscData("김찬우", 173, 0.7),
+		         new PhyscData("박준서", 171, 2.0),
+		         new PhyscData("유서범", 171, 1.5),
+		         new PhyscData("이수연", 168, 0.4),
+		         new PhyscData("장경오", 171, 1.2),
+		         new PhyscData("황지안", 169, 0.8),
 		     };
 		int nx = x.length;
 
