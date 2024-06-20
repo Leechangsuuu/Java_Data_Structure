@@ -24,7 +24,7 @@ class LinkedList1 {
 
 	public boolean Delete(int element) //전달된 element 값이 존재 하면 삭제하고 true로 리턴
 	{
-		Node1 q, current = first; //q랑 current를 첫번쨰로 초기화
+		Node1 q, current = first; //q랑 current를 첫번쨰 노드로 초기화
 		q = current;
 		
 		if(first == null) {//첫번째 값이 없으면 false반환
@@ -39,79 +39,60 @@ class LinkedList1 {
 				q.link = q.link.link; // 노드 건너뛰고 연결
 				return true;
 			}
-			q = current.link; //q를 다음 노드로 이동
+			q = q.link; //q를 다음 노드로 이동
 		}
-		
-	return false;//값 못찾으면 false 반환
+		return false;//값 못찾으면 false 반환
 	}
 
 	public void Show() { // 전체 리스트를 순서대로 출력한다.
 		Node1 p = first; // p를 초기화
-		int num = 0; //인덱스
 		while(p != null) { //
 			System.out.println(p.data + "-> ");
 			p = p.link; // p를 다음 값으로 옮김
-			if(p == null) {
-				System.out.println("리스트 끝");
-			}
 		}
+		System.out.println("리스트 끝");
 	}
 
-	public void Add(int element) // 임의 값을 삽입할 때 리스트가 오름차순으로 정렬이 되도록 한다
-	{
+	public void Add(int element) { // 임의 값을 삽입할 때 리스트가 오름차순으로 정렬이 되도록 한다
 		Node1 newNode = new Node1(element);
 		if (first == null) // insert into empty list
 		{
 			first = newNode;
 			return;
 		}
-//		
-//		if (element > first.data) {
-//			first.link = newNode;
-//			return;
-//		}else {
-//			newNode.link = first;
-//			first = newNode;
-//		}
-		
 		//리스트 순회하며 삽입위치찾기
 		Node1 p = first , q = null;//p라는 변수를 도입해서 각 노드를 따라간다
 		//p는 현재노드 ,  q는 p의 이전노드
 		while(p != null) {
-			if(element > p.data) {
-				q = p;//q가p를 따라다닌다
-				
-				p = p.link;
+			if(element <= p.data) {
+				break;
 			}
-			else {
-				if(q==null) {
-					newNode.link = p;
-					first = newNode;
-					return;  //1번처리-첫번쨰 노드에 삽입
-				}
-				q.link = newNode;//2번경우
-				newNode.link = p;//q랑 p사이에 새로운 노드 넣음
-				return;
-			}
+			q = p;//q가p를 따라다닌다
+			
+			p = p.link;
 		}
-		
-		if(q != null) {
-			q.link = newNode; // 리스트 끝에 삽입
-		}else {
-			first = newNode;// 리스트가 비었을 경우에 첫번쨰 노드호 설정
+			
+		if(q==null) { //첫번째 노드보다 작은경우
+			newNode.link = p;
+			first = newNode;
+			 //1번처리-첫번쨰 노드에 삽입
+		}
+		else {//중간 또는 끝에 삽입하는 경우
+			q.link = newNode;//2번경우
+			newNode.link = p;//q랑 p사이에 새로운 노드 넣음		
 		}
 	}
 
 	public boolean Search(int data) { //전달된 data 값을 찾아 존재하면 true로 리턴, 없으면 false로 리턴
-		Node1 ptr = first;
+		Node1 ptr = first;//첫번째 노드로 포인터 초기화
 		
-		while(ptr != null){
-			if(data == ptr.data) {
-				return true;
+		while(ptr != null){//리스트 끝까지 순회
+			if(data == ptr.data) {//데이터가 일치하면
+				return true;//true반환
 			}
-			ptr = ptr.link;
+			ptr = ptr.link;//다음 노드로 이동
 		}
-		return false;
+		return false;//끝끼지 찾지못하면 false반환
 	}
 	void Merge(LinkedList1 b) {
 		/*
@@ -120,6 +101,7 @@ class LinkedList1 {
 		 * 난이도 등급: 최상
 		 * a = (3, 5, 7), b = (2,4,8,9)이면 a = (2,3,4,5,8,9)가 되도록 구현하는 코드
 		 */
+		
 	}
 }
 

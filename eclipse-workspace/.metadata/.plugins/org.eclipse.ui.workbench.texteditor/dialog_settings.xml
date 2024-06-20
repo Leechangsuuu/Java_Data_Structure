@@ -6,11 +6,19 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="Empioyee2"/>
+		<item key="selection" value="SimpleObject7"/>
 		<list key="findhistory">
+			<item value="SimpleObject5"/>
+			<item value="SimpleObject3"/>
+			<item value="Node3"/>
+			<item value="CircularList"/>
 			<item value="Employee"/>
 		</list>
 		<list key="replacehistory">
+			<item value="SimpleObject7"/>
+			<item value="SimpleObject5"/>
+			<item value="Node5"/>
+			<item value="CircularList3"/>
 			<item value="Empioyee2"/>
 		</list>
 	</section>
