@@ -97,22 +97,22 @@ class CircularList3 {
 
 		while (current != first) {
 			if (cc.compare(current.data, element) == 0) {
-				prev.link = current.link; //current를 리스트에서 제거
+				prev.link = current.link; 
 				return 1; // 삭제 성공
 			}
-			prev = current;//prev를 current로 업데이트
-			current = current.link;//current를 다음 노드로 업데이트
+			prev = current;
+			current = current.link;
 		}
 		return -1; // 삭제할 대상이 없다.
 	}
 
 	public void Show() { // 전체 리스트를 순서대로 출력한다.
-		Node5 p = first.link;//p는 리스트의 첫번째 요소 가리킴
+		Node5 p = first.link;
 		SimpleObject7 so;
 		while (p != first) {
-			so = p.data;//현재노드 p의 데이터를 so에 저장
+			so = p.data;
 			System.out.print(so + " ");
-			p = p.link;//p를  다음노드로 이동
+			p = p.link;
 		}
 		System.out.println();
 
@@ -120,37 +120,37 @@ class CircularList3 {
 
 	public void Add(SimpleObject7 element, Comparator<SimpleObject7> cc) // 임의 값을 삽입할 때 리스트가 오름차순으로 정렬이 되도록 한다
 	{
-		Node5 newNode = new Node5(element);//새롭게 삽입할 노드 생성
-		if (first.link == first) {//리스트가 비어있는 경우
+		Node5 newNode = new Node5(element);
+		if (first.link == first) {
 			first.link = newNode;
-			newNode.link = first;//순환 유지
+			newNode.link = first;
 			return;
 		} else {
-			Node5 current = first.link;//초기롸
-			Node5 prev = first;//초기화
+			Node5 current = first.link;
+			Node5 prev = first;
 
-			//새로운 요소를 삽입할 위치를 찾는다
-			while (current != first && cc.compare(current.data, element) < 0) {//element가 current.data보다 큰 동안 반복
-				prev = current;//업데이트
-				current = current.link;//다음 노드로 이동
+			while (current != first && cc.compare(current.data, element) < 0) {
+				prev = current;
+				current = current.link;
 			}
-			//새로운 노드를 리스트에 삽입
-			//element가 current.data보다 작거나 같을 경우 
+			//if(current == first) {
 				newNode.link = current;
 				prev.link = newNode;
+			//}
+//			else {
+//				newNode.link = current;
+//				prev
+//			}
+//			
+//			prev.link = newNode;
+//			newNode.link = current;
 		}
 
 	}
 
 	public boolean Search(SimpleObject7 element, Comparator<SimpleObject7> cc) { // 전체 리스트를 순서대로 출력한다.
 		Node5 q, current = first.link;
-		q = current;//초기화
-		while(q != first) {
-			if(cc.compare(element, q.data)==0) {
-				return true;
-			}
-			q = q.link;
-		}
+
 		return false;
 	}
 	void Merge(CircularList3 b, Comparator<SimpleObject7> cc) {

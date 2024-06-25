@@ -144,9 +144,10 @@ class CircularList3 {
 
 	public boolean Search(SimpleObject7 element, Comparator<SimpleObject7> cc) { // 전체 리스트를 순서대로 출력한다.
 		Node5 q, current = first.link;
-		q = current;//초기화
+		q=current;
 		while(q != first) {
 			if(cc.compare(element, q.data)==0) {
+				current = q;
 				return true;
 			}
 			q = q.link;

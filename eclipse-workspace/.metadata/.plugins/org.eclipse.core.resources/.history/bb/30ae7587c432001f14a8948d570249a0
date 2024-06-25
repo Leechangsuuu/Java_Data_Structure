@@ -69,7 +69,7 @@ class Node4 {
 	Node4 llink; // 좌측포인터(앞쪽 노드에 대한 참조)
 	Node4 rlink; // 우측포인터(뒤쪽 노드에 대한 참조)
 	public Node4(SimpleObject2 data){
-		this.data = data;//생성자
+		this.data = data;
 		llink = rlink = this;
 	}
 }
@@ -90,31 +90,26 @@ class DoubledLinkedList2 {
 
 	// --- 노드를 검색 ---//
 	public boolean search(SimpleObject2 obj, Comparator<? super SimpleObject2> c) {
-		Node4 p, current = first;//초기화
+		Node4 p, current = first;
 		p = current;
-		p = first.rlink;//실제 첫번쨰 노드임
+		p = first.rlink;
 		while(p != first) {
 			if(c.compare(obj, p.data) == 0) {
 				current = p;
 				return true;
 			}
-			p = p.rlink;//다음 노드로 이동
+			p = p.rlink;
 		}
 		return false;
 	}
 
 	// --- 전체 노드 표시 ---//
 	public void show() {
-		Node4 p = first.rlink;//실제 첫번쨰 노드
-		if(p==first) {//비어있을때
-			System.out.println("리스트가 비어 있습니다");
-			return;
-		}
-		do {
+		Node4 p = first;
+		while(p != null) {
 			System.out.println(p.data + "->");
 			p = p.rlink;
 		}
-		while(p != first);
 		System.out.println("리스트 끝!");
 	}
 
@@ -122,28 +117,27 @@ class DoubledLinkedList2 {
 	public void add(SimpleObject2 obj, Comparator<? super SimpleObject2> c) {
 		Node4 newNode = new Node4(obj);
 		Node4 p = first;
-		if(p.rlink == p) {//비어있을때
-			newNode.llink = p;//새로운 노드의 앞,뒤 모두 p가리킴
+		if(p.rlink == p) {
+			newNode.llink = p;
 			newNode.rlink = p;
-			p.rlink = newNode;//p도 새로운노드 가리킴
+			p.rlink = newNode;
 			p.llink = newNode;
 			return;
 		}
-		//p의 다음 노드가 first가 아니면서 obj이 p의 다음 값보다 큰 동안 반복
 		while(p.rlink != first && c.compare(obj , p.rlink.data) >0) {
-			p = p.rlink;//다음 으호 이동
+			p = p.rlink;
 		}
 		newNode.rlink = p.rlink;
 		newNode.llink = p;
 		p.rlink.llink = newNode;
 		p.rlink = newNode;
-		return;
+		
 		}
 
 
 	// --- list에 삭제할 데이터가 있으면 해당 노드를 삭제 ---//
 	public void delete(SimpleObject2 obj, Comparator<? super SimpleObject2> c) {
-		
+
 	}
 	public DoubledLinkedList2 merge_NewList(DoubledLinkedList2 lst2, Comparator<SimpleObject2> cc) {
 		//l3 = l1.merge(l2); 실행하도록 리턴 값이 리스트임 
@@ -221,9 +215,9 @@ public class 실습8_6객체이중리스트_test {
 		do {
 			switch (menu = SelectMenu()) {
 			case Add: // 객체들의 올림차순으로 정렬되도록 구현
-				so =  new SimpleObject2();
-				so.scanData("입력", 3);
-				lst1.add(so, SimpleObject2.NO_ORDER);
+//				so =  new SimpleObject2();
+//				so.scanData("입력", 3);
+//				lst1.add(so, SimpleObject2.NO_ORDER);
 				SimpleObject2 [] simpleobjects = new SimpleObject2[10];
 				makeSimpleObjects(simpleobjects);
 				for (int i = 0; i < simpleobjects.length;i++)
