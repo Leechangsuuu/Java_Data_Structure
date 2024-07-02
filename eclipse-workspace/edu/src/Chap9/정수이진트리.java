@@ -12,8 +12,16 @@ class TreeNode5 {
 	TreeNode5 LeftChild;
 	int data;
 	TreeNode5 RightChild;
-
-	public TreeNode5() {
+	
+	public TreeNode5(int data,TreeNode5 LeftChild,TreeNode5 RightChild) {
+		this.data = data;
+		this.LeftChild = LeftChild;
+		this.RightChild = RightChild;
+	}
+	
+	public TreeNode5(int x) {
+		// TODO Auto-generated constructor stub
+		this.data = x;
 		LeftChild = RightChild = null;
 	}
 }
@@ -322,28 +330,31 @@ class Tree5 {
 
 	boolean insert(int x) {// binary search tree를 만드는 입력 : left subtree < 노드 x < right subtree
 		//inorder traversal시에 정렬된 결과가 나와야 한다
-		TreeNode5 newNode = new TreeNode5(x);
-		TreeNode5 p = root;
-		TreeNode5 q = null;
-		if(p == null)
-			root = newNode;
-		while(p != null) {
-			q = p;
-			if(x < p.data) {
+		TreeNode5 newNode = new TreeNode5(x);//삽압랄 갑을 가진 새 노드 생성
+		TreeNode5 p = root;//p는 현재 탐색 중인 노드를 가리킴. 첨에는 root로 시작
+		TreeNode5 q = null;//q는 p의 부모노드를 가리킴
+		boolean tag = false;//tag 초기화
+		if(p == null) {//트리가 비어있는 경우
+			root = newNode;//새로운 노드를 root로 설정
+			return true;//성공!
+		}
+		while(p != null) {//현재 노드가 null이 아닐 때까지 반복
+			q = p;//부모노드를 현재 노드로 설정
+			if(x < p.data) {//삽입항 값이 현재의 노드보다 작을 경우
 				tag = true;
-				p = p.LeftChild;
+				p = p.LeftChild;//왼쪽 자식으로 이동
 			}
-			else {
+			else {//삽입할값이 현재 노드보다 크거나 같을 경우
 				tag = false;
-				p = p.RightChild;
+				p = p.RightChild;//오른쪽 자식으로 이동
 			}
 		}
-		if(tag)
-			q.LeftChild = newNode;
-		else
-			q.RightChild = newNode;
+		if(tag==true)//삽입한 위치가 왼쪽자식인 경우
+			q.LeftChild = newNode;//부모 노드의 왼쪽자식으로 설정		
+		else//오릉쪽인 경우	
+			q.RightChild = newNode;//오른쪽 자식으로 이동
 		
-		return true;
+		return true;//성공!
 	}
 
 	boolean delete(int num) {//binary search tree에서 임의 값을 갖는 노드를 찾아 삭제한다.
@@ -359,7 +370,20 @@ class Tree5 {
 
 	boolean search(int num) {//num 값을 binary search tree에서 검색
 		TreeNode5 p = root;
-
+		while(true) {
+			if(p == null) {//비어있을 경우
+				return false;
+			}
+			if(p.data == num) {//값 찾음
+				return true;
+			}
+			else if(num < p.data) {//찾는값이 비교값보다 작을경우 왼쪽 노드로 감
+				p = p.LeftChild;
+			}
+			else {//찾는값이 비교값보다 큰 경우 오른쪽 노드로 감
+				p = p.RightChild;
+			}
+		}
 	}
 }
 

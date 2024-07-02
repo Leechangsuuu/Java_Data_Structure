@@ -92,7 +92,7 @@ class DoubledLinkedList2 {
 	public boolean search(SimpleObject2 obj, Comparator<? super SimpleObject2> c) {
 		Node4 p, current = first;//초기화
 		p = current;
-		p = first.rlink;//실제 첫번쨰 노드임
+		p = first.rlink;//실제 노드는 첫번쨰 노드임
 		while(p != first) {
 			if(c.compare(obj, p.data) == 0) {
 				current = p;
@@ -111,7 +111,7 @@ class DoubledLinkedList2 {
 			return;
 		}
 		do {
-			System.out.println(p.data + "->");
+			System.out.print(p.data + "->");
 			p = p.rlink;
 		}
 		while(p != first);
@@ -143,7 +143,18 @@ class DoubledLinkedList2 {
 
 	// --- list에 삭제할 데이터가 있으면 해당 노드를 삭제 ---//
 	public void delete(SimpleObject2 obj, Comparator<? super SimpleObject2> c) {
-		
+		Node4 current = first.rlink;
+
+		while(current != first) {//끝까지반복
+			if(c.compare(current.data, obj) == 0) {//입력받은 값과 같으면
+				current.llink.rlink = current.rlink;//값 삭재(currentd의 왼쪽이 current의 오른쪽에 있는 걸 가리킴 -> current 삭제된
+				if(current.rlink != first) {
+					current.rlink.llink = current.llink;
+				}
+				return;
+			}
+			current = current.rlink;
+		}
 	}
 	public DoubledLinkedList2 merge_NewList(DoubledLinkedList2 lst2, Comparator<SimpleObject2> cc) {
 		//l3 = l1.merge(l2); 실행하도록 리턴 값이 리스트임 
